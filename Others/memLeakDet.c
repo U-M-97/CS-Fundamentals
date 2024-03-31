@@ -18,9 +18,9 @@ void freeMem(struct Memory* mptr){
     mptr->size = 0;
 }
 
-void displayLeaks(struct Memory* hptr, int filledMemArray){
+void displayLeaks(struct Memory* hptr, int* filledMemArray){
     int totalMemoryLeak = 0;
-    for(int i = 0; i < filledMemArray; i++){
+    for(int i = 0; i < *filledMemArray; i++){
         if(hptr->ptr != NULL && hptr->size != 0){
             printf("%d, bytes of memory leak detected\n", hptr->size);
             totalMemoryLeak += hptr->size;
@@ -54,6 +54,6 @@ int main(){
     filledMemArray++;
     freeMem(mptr);
 
-    displayLeaks(hptr, filledMemArray);
+    displayLeaks(hptr, &filledMemArray);
     return 0;
 }
